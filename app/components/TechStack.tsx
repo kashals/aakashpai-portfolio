@@ -1,7 +1,7 @@
 import SectionMarker from "./ui/SectionMarker";
 import { TECH } from "../data/portfolio";
 import {
-  SiHtml5, SiCss3, SiJavascript, SiTypescript, SiPython,
+  SiHtml5, SiCss, SiJavascript, SiTypescript, SiPython,
   SiReact, SiNextdotjs, SiTailwindcss, SiFramer, SiStreamlit,
   SiNodedotjs, SiSupabase, SiPostgresql, SiMysql, SiRedis,
   SiGit, SiDocker, SiGooglecloud, SiN8N,
@@ -12,7 +12,7 @@ import type { IconType } from "react-icons";
 // map tech name -> icon
 const ICON_MAP: Record<string, IconType> = {
   HTML: SiHtml5,
-  CSS: SiCss3,
+  CSS: SiCss,
   JavaScript: SiJavascript,
   TypeScript: SiTypescript,
   Python: SiPython,
