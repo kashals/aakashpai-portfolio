@@ -47,7 +47,7 @@ export default function Navbar() {
               className="text-xs font-semibold tracking-[0.2em] uppercase"
               style={{ color: "var(--text)" }}
             >
-              AAKASH_PAI
+              AP.DEV
             </a>
 
             {/* desktop links */}

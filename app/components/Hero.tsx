@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import TerminalWindow from "./ui/TerminalWindow";
+import { STATS, TERMINAL_SEQ } from "../data/portfolio";
 
 const PROMPT = "guest@aakash:~$";
 
@@ -11,31 +12,12 @@ type Line =
   | { kind: "out"; text: string }
   | { kind: "gap" };
 
-// sequence to play through
-const SEQ = [
-  { type: "cmd", text: "./initialize_portfolio.sh" },
-  { type: "out", text: "[OK] Loading dependencies..." },
-  { type: "out", text: "[OK] Mounting environment..." },
-  { type: "out", text: "[OK] Bootstrapping UI core..." },
-  { type: "gap" },
-  { type: "cmd", text: "whoami" },
-  { type: "out", text: "> Aakash Pai" },
-  { type: "out", text: "> CS Student @ [Your University]" },
-  { type: "out", text: "> Full-Stack Engineer  |  Builder" },
-  { type: "gap" },
-  { type: "cmd", text: "cat status.txt" },
-  { type: "out", text: "> Open to internships & new opportunities." },
-] as const;
+// use data from portfolio.ts
+const SEQ = TERMINAL_SEQ;
 
 const CHAR_MS = 42;
 const OUT_MS = 75;
 const CMD_PAUSE = 220;
-
-const STATS = [
-  { val: "10+", label: "PROJECTS_BUILT" },
-  { val: "2K+", label: "COMMITS" },
-  { val: "3YRS", label: "EXPERIENCE" },
-];
 
 export default function Hero() {
   const [lines, setLines] = useState<Line[]>([]);
