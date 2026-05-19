@@ -80,7 +80,7 @@ export default function TerminalWindow({
       </div>
 
       {/* body */}
-      <div className="text-sm leading-7" style={{ padding: "24px" }}>
+      <div className="text-sm leading-7" style={{ padding: "24px", minHeight: "400px" }}>
         {children}
       </div>
     </div>
