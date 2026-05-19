@@ -1,15 +1,61 @@
 @import "tailwindcss";
+@source "./**/*.{ts,tsx}";
+
+/* explicit spacing — tailwind v4 + turbopack doesn't always generate these */
+.p-4  { padding: 16px; }
+.p-5  { padding: 20px; }
+.p-6  { padding: 24px; }
+.p-8  { padding: 32px; }
+.px-4 { padding-left: 16px; padding-right: 16px; }
+.px-5 { padding-left: 20px; padding-right: 20px; }
+.px-6 { padding-left: 24px; padding-right: 24px; }
+.px-8 { padding-left: 32px; padding-right: 32px; }
+.py-3 { padding-top: 12px;  padding-bottom: 12px; }
+.py-4 { padding-top: 16px;  padding-bottom: 16px; }
+.py-5 { padding-top: 20px;  padding-bottom: 20px; }
+.py-6 { padding-top: 24px;  padding-bottom: 24px; }
+.py-8 { padding-top: 32px;  padding-bottom: 32px; }
+.pt-4 { padding-top: 16px; }
+.h-3  { height: 12px; }
+.h-4  { height: 16px; }
+.h-14 { height: 56px; }
+.w-8  { width: 32px; }
+.h-8  { height: 32px; }
+.mt-1 { margin-top: 4px; }
+.mt-2 { margin-top: 8px; }
+.mt-4 { margin-top: 16px; }
+.mt-5 { margin-top: 20px; }
+.mt-6 { margin-top: 24px; }
+.mt-8 { margin-top: 32px; }
+.mb-1 { margin-bottom: 4px; }
+.mb-2 { margin-bottom: 8px; }
+.mb-3 { margin-bottom: 12px; }
+.mb-4 { margin-bottom: 16px; }
+.mb-6 { margin-bottom: 24px; }
+.gap-1 { gap: 4px; }
+.gap-2 { gap: 8px; }
+.gap-3 { gap: 12px; }
+.gap-4 { gap: 16px; }
+.gap-5 { gap: 20px; }
+.gap-6 { gap: 24px; }
+.gap-8 { gap: 32px; }
+.gap-12 { gap: 48px; }
+.space-y-3 > * + * { margin-top: 12px; }
+.space-y-4 > * + * { margin-top: 16px; }
+.leading-6 { line-height: 1.5rem; }
+.leading-7 { line-height: 1.75rem; }
+.leading-8 { line-height: 2rem; }
 
 :root {
   --bg: #0c0c0e;
-  --surface: #111114;
-  --surface-2: #16161a;
-  --border: #222226;
-  --border-2: #2a2a2e;
+  --surface: #151518;
+  --surface-2: #1c1c20;
+  --border: #2c2c31;
+  --border-2: #38383e;
   --text: #e8e8ea;
-  --muted: #52525b;
-  --dim: #3f3f46;
-  --grid: rgba(255, 255, 255, 0.025);
+  --muted: #64646f;
+  --dim: #48484f;
+  --grid: rgba(255, 255, 255, 0.045);
 
   /* terminal */
   --t-prompt: #6b8cba;
@@ -18,6 +64,10 @@
   --t-dot-red: #ff5f57;
   --t-dot-yellow: #ffbd2e;
   --t-dot-green: #28c840;
+
+  /* spacing */
+  --section-pad: 96px;
+  --hero-pad-top: 148px;
 }
 
 * {
@@ -60,10 +110,67 @@ body::before {
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--border-2); }
 
+/* layout */
 .container {
   max-width: 980px;
   margin: 0 auto;
-  padding: 0 32px;
+  padding: 0 40px;
+}
+
+/* explicit hover effects */
+.hover-text {
+  transition: color 0.2s ease;
+}
+.hover-text:hover {
+  color: var(--text) !important;
+}
+
+.hover-card {
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+.hover-card:hover {
+  border-color: var(--muted) !important;
+  background-color: var(--surface-2) !important;
+}
+
+/* sections — drive all spacing from here, not Tailwind */
+.section {
+  padding-top: var(--section-pad);
+  padding-bottom: var(--section-pad);
+  position: relative;
+  z-index: 10;
+}
+
+.section-hero {
+  padding-top: var(--hero-pad-top);
+  padding-bottom: var(--section-pad);
+  position: relative;
+  z-index: 10;
+}
+
+/* divider between sections */
+.section-divider {
+  border-top: 1px solid var(--border);
+}
+
+/* section marker — 01 // LABEL */
+.section-marker {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 40px;
+  display: block;
+}
+
+/* section heading */
+.section-heading {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+  color: var(--text);
+  margin-bottom: 24px;
 }
 
 /* blinking cursor block */
@@ -77,7 +184,8 @@ body::before {
   width: 8px;
   height: 1em;
   background: var(--text);
-  vertical-align: text-bottom;
+  vertical-align: baseline;
+  transform: translateY(2px);
   animation: blink 1s step-end infinite;
 }
 
