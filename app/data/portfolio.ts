@@ -66,6 +66,7 @@ export type Project = {
   tech: string[];
   github: string;
   live: string | null;
+  image: string | null;
   featured: boolean;
 };
 
@@ -77,6 +78,7 @@ export const PROJECTS: Project[] = [
     tech: ["TypeScript", "Next.js 15", "Supabase", "Stripe", "Upstash Redis", "Tailwind CSS"],
     github: "https://github.com/kashfmh/sugar-and-icing",
     live: "https://sugarandicing.vercel.app/",
+    image: "/project_pictures/sai.png",
     featured: true,
   },
   {
@@ -86,16 +88,8 @@ export const PROJECTS: Project[] = [
     tech: ["Python", "Streamlit", "Gemini API", "Google Cloud Run", "Docker", "Pandas"],
     github: "https://github.com/kashfmh/linkops",
     live: "https://linkops-engine-909093874855.asia-southeast1.run.app",
+    image: "/project_pictures/linkops.png",
     featured: true,
-  },
-  {
-    name: "Gym Management System",
-    description:
-      "Full-stack gym management platform with member registration, attendance tracking, and subscription management.",
-    tech: ["PHP", "MySQL", "HTML", "CSS", "JavaScript"],
-    github: "https://github.com/kashfmh/Gym_Management_Software",
-    live: null,
-    featured: false,
   },
 ];
 

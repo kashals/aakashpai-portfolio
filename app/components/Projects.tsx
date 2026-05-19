@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { ReactLenis } from "lenis/react";
 import { motion, useScroll, useTransform, MotionValue } from "motion/react";
 import { ExternalLink } from "lucide-react";
@@ -28,26 +29,29 @@ function ProjectCard({
   });
 
   const scale = useTransform(progress, range, [1, targetScale]);
+  const imageScale = useTransform(scrollYProgress, [0, 1], [1.5, 1]);
 
   return (
     <div
       ref={container}
-      className="h-screen flex items-center justify-center sticky top-0"
+      className="h-screen flex justify-center sticky top-0"
+      style={{ paddingTop: "140px" }}
     >
-      <div className="container w-full flex justify-center">
+      <div className="container w-full flex justify-center h-fit">
         <motion.div
           style={{
             scale,
-            top: `calc(5vh + ${i * 30}px)`,
+            top: `calc(${i * 30}px)`,
             background: "var(--surface)",
             border: "1px solid var(--border)",
             boxShadow: i > 0 ? "0 -20px 40px rgba(0,0,0,0.4)" : "none",
           }}
-          className="flex flex-col justify-between w-full max-w-4xl relative origin-top"
+          className="flex flex-col md:flex-row w-full max-w-5xl relative origin-top overflow-hidden"
         >
-          <div style={{ padding: "48px" }}>
+          {/* Text Content */}
+          <div className="flex-1" style={{ padding: "48px" }}>
             <h3
-              className="text-xl font-semibold tracking-tight"
+              className="text-2xl font-semibold tracking-tight"
               style={{ color: "var(--text)", marginBottom: "16px" }}
             >
               {project.name}
@@ -101,6 +105,27 @@ function ProjectCard({
               )}
             </div>
           </div>
+
+          {/* Image Content (if available) */}
+          {project.image && (
+            <div
+              className="hidden md:block relative w-[45%] h-auto overflow-hidden"
+              style={{ borderLeft: "1px solid var(--border)" }}
+            >
+              <motion.div
+                className="w-full h-full relative min-h-[400px]"
+                style={{ scale: imageScale }}
+              >
+                <Image
+                  src={project.image}
+                  alt={project.name}
+                  fill
+                  className="object-cover object-top"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </motion.div>
+            </div>
+          )}
         </motion.div>
       </div>
     </div>
@@ -126,7 +151,7 @@ export default function Projects() {
           <SectionMarker index="03" label="WORK" />
         </div>
 
-        <div className="relative w-full">
+        <div className="relative w-full" style={{ marginTop: "-40px" }}>
           {PROJECTS.map((project, i) => {
             const targetScale = 1 - (PROJECTS.length - i) * 0.03;
             return (
