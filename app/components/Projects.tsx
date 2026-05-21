@@ -6,6 +6,11 @@ import { ReactLenis } from "lenis/react";
 import { motion, useScroll, useTransform, MotionValue } from "motion/react";
 import { ExternalLink } from "lucide-react";
 import { SiGithub } from "react-icons/si";
+import dynamic from "next/dynamic";
+const GitHubCalendar = dynamic(
+  () => import("react-github-calendar").then((mod) => mod.GitHubCalendar),
+  { ssr: false }
+);
 import SectionMarker from "./ui/SectionMarker";
 import { PROJECTS, type Project } from "../data/portfolio";
 
@@ -165,6 +170,21 @@ export default function Projects() {
               />
             );
           })}
+        </div>
+
+        {/* GitHub Activity Section */}
+        <div className="container w-full max-w-5xl mx-auto flex flex-col mt-24 relative z-10">
+          <h3 className="text-xl font-semibold tracking-tight mb-8" style={{ color: "var(--text)" }}>
+            GitHub Activity
+          </h3>
+          <div className="p-8 w-full overflow-x-auto flex justify-center rounded-lg" style={{ background: "var(--surface)", border: "1px solid var(--border)" }}>
+            <GitHubCalendar 
+              username="Kashfmh" 
+              colorScheme="dark"
+              fontSize={12}
+              blockSize={12}
+            />
+          </div>
         </div>
       </section>
     </ReactLenis>
