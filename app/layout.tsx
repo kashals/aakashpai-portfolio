@@ -24,13 +24,16 @@ export const metadata: Metadata = {
 };
 
 import CustomCursor from "./components/ui/CustomCursor";
+import KonamiCodeProvider from "./components/ui/KonamiCodeProvider";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={cn("font-sans", geist.variable)}>
       <body className="min-h-dvh">
-        <CustomCursor />
-        {children}
+        <KonamiCodeProvider>
+          <CustomCursor />
+          {children}
+        </KonamiCodeProvider>
       </body>
     </html>
   );

@@ -211,6 +211,23 @@
 
 }
 
+:root[data-theme="light"] {
+  --bg: #fafafa;
+  --surface: #ffffff;
+  --surface-2: #f4f4f5;
+  --border: #e4e4e7;
+  --border-2: #d4d4d8;
+  --text: #09090b;
+  --muted: #71717a;
+  --dim: #a1a1aa;
+  --grid: rgba(0, 0, 0, 0.045);
+
+  /* terminal */
+  --t-prompt: #3b82f6;
+  --t-output: #52525b;
+  --t-ok: #16a34a;
+}
+
 
 * {
   box-sizing: border-box;
@@ -242,6 +259,21 @@ body {
   * {
     cursor: none !important;
   }
+}
+
+/* View Transitions for Konami Code */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 2;
 }
 
 /* aceternity grid background */
