@@ -5,6 +5,8 @@ import TerminalWindow from "./ui/TerminalWindow";
 import { STATS, TERMINAL_SEQ } from "../data/portfolio";
 import { FaWhatsapp, FaLinkedin, FaGithub } from "react-icons/fa";
 
+import CountUp from "./ui/CountUp";
+
 const PROMPT = "guest@aakash:~$";
 
 // line types rendered in terminal
@@ -200,7 +202,7 @@ export default function Hero() {
                 className="text-2xl font-semibold tracking-tight"
                 style={{ color: "var(--text)", marginBottom: "8px" }}
               >
-                {s.val}
+                <CountUp value={s.val} />
               </div>
               <div
                 className="text-xs tracking-[0.15em] uppercase"
