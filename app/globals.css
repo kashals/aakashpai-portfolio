@@ -255,7 +255,7 @@ body {
   overflow-x: hidden;
 }
 
-@media (pointer: fine) {
+@media (pointer: fine) and (min-width: 769px) {
   * {
     cursor: none !important;
   }
@@ -468,6 +468,17 @@ body::before {
 /* divider between sections */
 .section-divider {
   border-top: 1px solid var(--border);
+}
+
+/* hero cta block spacing — uses explicit CSS so Tailwind v4 + Turbopack doesn't drop it */
+.hero-cta-block {
+  margin-bottom: 100px;
+}
+
+@media (min-width: 768px) {
+  .hero-cta-block {
+    margin-bottom: 64px;
+  }
 }
 
 /* section marker — 01 // LABEL */

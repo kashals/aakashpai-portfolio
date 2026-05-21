@@ -12,6 +12,8 @@ import {
 } from "@/components/ui/resizable-navbar";
 import { useState, useEffect } from "react";
 import { Terminal, FileText } from "lucide-react";
+import { SOCIALS } from "../data/portfolio";
+import { FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa";
 
 export default function Navbar() {
   const navItems = [
@@ -53,7 +55,7 @@ export default function Navbar() {
   const Logo = () => (
     <a
       href="#"
-      className="text-xs font-semibold tracking-[0.2em] uppercase relative z-20 mr-4 flex items-center px-2 py-1"
+      className="text-xs font-semibold tracking-[0.2em] uppercase relative z-[110] mr-4 flex items-center px-2 py-1"
       style={{ color: "var(--text)" }}
     >
       AP.DEV
@@ -102,33 +104,66 @@ export default function Navbar() {
           <MobileNavMenu
             isOpen={isMobileMenuOpen}
             onClose={() => setIsMobileMenuOpen(false)}
-            className="border border-border bg-surface dark:bg-surface"
           >
-            {navItems.map((item, idx) => {
-              const isActive = activeSection === item.link.replace("#", "");
-              return (
+            <div className="flex w-full flex-col items-end gap-6 relative h-full">
+              {/* Menu Links */}
+              <div className="flex w-full flex-col items-end justify-center flex-1 gap-6">
+                {navItems.map((item, idx) => {
+                  const isActive = activeSection === item.link.replace("#", "");
+                  return (
+                    <a
+                      key={`mobile-link-${idx}`}
+                      href={item.link}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className={`text-4xl sm:text-5xl font-medium tracking-tight hover:opacity-70 transition-opacity ${isActive ? "text-text" : "text-muted"}`}
+                      style={{ color: isActive ? "var(--text)" : "var(--muted)" }}
+                    >
+                      {item.name}
+                    </a>
+                  );
+                })}
                 <a
-                  key={`mobile-link-${idx}`}
-                  href={item.link}
+                  href="/resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`relative text-xs tracking-[0.15em] uppercase hover:text-text w-full pb-4 border-b border-border ${isActive ? "text-text" : "text-muted"}`}
-                  style={{ color: isActive ? "var(--text)" : "var(--muted)" }}
+                  className="text-4xl sm:text-5xl font-medium tracking-tight hover:opacity-70 transition-opacity mt-4"
+                  style={{ color: "var(--text)" }}
                 >
-                  <span className="block">{item.name}</span>
+                  RESUME
                 </a>
-              );
-            })}
-            <div className="flex w-full flex-col gap-4 mt-4">
-              <a
-                href="/resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="text-xs tracking-[0.15em] uppercase w-full text-left"
-                style={{ color: "var(--text)" }}
-              >
-                RESUME
-              </a>
+              </div>
+
+              {/* Social Icons at bottom right */}
+              <div className="flex items-center gap-6 mt-auto pt-8">
+                <a
+                  href={SOCIALS.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:opacity-70 transition-opacity"
+                  style={{ color: "var(--text)" }}
+                >
+                  <FaGithub size={24} />
+                </a>
+                <a
+                  href={SOCIALS.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:opacity-70 transition-opacity"
+                  style={{ color: "var(--text)" }}
+                >
+                  <FaLinkedin size={24} />
+                </a>
+                <a
+                  href={SOCIALS.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:opacity-70 transition-opacity"
+                  style={{ color: "var(--text)" }}
+                >
+                  <FaWhatsapp size={24} />
+                </a>
+              </div>
             </div>
           </MobileNavMenu>
         </MobileNav>

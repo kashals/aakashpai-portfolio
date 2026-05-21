@@ -144,34 +144,14 @@ export const NavItems = ({ items, className, onItemClick, activeSection }: NavIt
 
 export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
   return (
-    <motion.div
-      animate={
-        {
-          backdropFilter: visible ? "blur(10px)" : "none",
-          WebkitBackdropFilter: visible ? "blur(10px)" : "none",
-          boxShadow: visible
-            ? "0 0 24px rgba(34, 42, 53, 0.06), 0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset"
-            : "none",
-          width: visible ? "90%" : "100%",
-          paddingRight: visible ? "12px" : "0px",
-          paddingLeft: visible ? "12px" : "0px",
-          borderRadius: visible ? "4px" : "2rem",
-          y: visible ? 20 : 0,
-        } as any
-      }
-      transition={{
-        type: "spring",
-        stiffness: 200,
-        damping: 50,
-      }}
+    <div
       className={cn(
-        "relative z-50 mx-auto flex w-full max-w-[calc(100vw-2rem)] flex-col items-center justify-between bg-transparent px-0 py-2 lg:hidden",
-        visible && "bg-white/80 dark:bg-neutral-950/80",
+        "relative z-50 mx-auto flex w-full flex-col items-center justify-between bg-transparent px-4 py-4 lg:hidden",
         className,
       )}
     >
       {children}
-    </motion.div>
+    </div>
   );
 };
 
@@ -197,15 +177,28 @@ export const MobileNavMenu = ({
   isOpen,
   onClose,
 }: MobileNavMenuProps) => {
+  // Prevent body scrolling when menu is open
+  React.useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
   return (
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
           className={cn(
-            "absolute inset-x-0 top-16 z-50 flex w-full flex-col items-start justify-start gap-4 rounded-md bg-[var(--surface)] border border-[var(--border)] px-4 py-8",
+            "fixed inset-0 z-[100] flex flex-col justify-center bg-[var(--bg)] px-8 py-16",
             className,
           )}
         >
@@ -223,10 +216,10 @@ export const MobileNavToggle = ({
   isOpen: boolean;
   onClick: () => void;
 }) => {
-  return isOpen ? (
-    <X className="text-black dark:text-white cursor-pointer" onClick={onClick} />
-  ) : (
-    <Menu className="text-black dark:text-white cursor-pointer" onClick={onClick} />
+  return (
+    <div onClick={onClick} className="cursor-pointer z-[110] relative text-[var(--text)]">
+      {isOpen ? <X size={28} strokeWidth={1.5} /> : <Menu size={28} strokeWidth={1.5} />}
+    </div>
   );
 };
 

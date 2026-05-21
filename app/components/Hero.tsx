@@ -99,7 +99,7 @@ export default function Hero() {
       <div className="container">
         
         {/* Centered Identity & CTAs */}
-        <div className="flex flex-col items-center text-center" style={{ marginBottom: "64px" }}>
+        <div className="flex flex-col items-center text-center hero-cta-block">
           <h1 
             className="text-5xl md:text-7xl font-bold tracking-tighter mb-6"
             style={{ color: "var(--text)" }}
@@ -137,7 +137,7 @@ export default function Hero() {
         </div>
 
         {/* Terminal Window Below */}
-        <div className="w-full max-w-4xl mx-auto relative text-left" style={{ marginBottom: "96px" }}>
+        <div className="w-full max-w-4xl mx-auto relative text-left mb-16 md:mb-[96px]" style={{ marginTop: "64px" }}>
           <TerminalWindow title={`bash — ${PROMPT.split("$")[0].trim()}`}>
               <div>
                 {lines.map((line, i) => {

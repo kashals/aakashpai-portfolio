@@ -14,7 +14,7 @@ export default function About() {
       <div className="container">
         <SectionMarker index="01" label="ABOUT" />
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", gap: "64px", alignItems: "start" }}>
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_280px] gap-8 md:gap-16 items-start">
           {/* bio */}
           <div>
             <h2

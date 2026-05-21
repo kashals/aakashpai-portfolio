@@ -54,7 +54,7 @@ function ProjectCard({
           className="flex flex-col md:flex-row w-full max-w-5xl relative origin-top overflow-hidden"
         >
           {/* Text Content */}
-          <div className="flex-1" style={{ padding: "48px" }}>
+          <div className="flex-1 p-6 md:p-12">
             <h3
               className="text-2xl font-semibold tracking-tight"
               style={{ color: "var(--text)", marginBottom: "16px" }}
