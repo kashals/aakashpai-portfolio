@@ -26,7 +26,6 @@ export default function KonamiCodeProvider({
   useEffect(() => {
     // Sync initial state
     document.documentElement.setAttribute("data-theme", "dark");
-    document.documentElement.classList.add("dark");
   }, []);
 
   useEffect(() => {
@@ -90,11 +89,6 @@ export default function KonamiCodeProvider({
   const applyTheme = (nextTheme: "dark" | "light") => {
     setTheme(nextTheme);
     document.documentElement.setAttribute("data-theme", nextTheme);
-    if (nextTheme === "light") {
-      document.documentElement.classList.remove("dark");
-    } else {
-      document.documentElement.classList.add("dark");
-    }
   };
 
   return <>{children}</>;
