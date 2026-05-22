@@ -25,6 +25,7 @@ export const metadata: Metadata = {
 
 import CustomCursor from "./components/ui/CustomCursor";
 import KonamiCodeProvider from "./components/ui/KonamiCodeProvider";
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -34,6 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <CustomCursor />
           {children}
         </KonamiCodeProvider>
+        <SpeedInsights />
       </body>
     </html>
   );
