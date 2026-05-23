@@ -12,14 +12,35 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://aakashpai.dev"),
   title: "Aakash Pai — Software Engineer",
   description: "Personal portfolio of Aakash Pai — software engineer, full-stack developer, builder.",
-  keywords: ["Aakash Pai", "portfolio", "software engineer", "developer"],
-  authors: [{ name: "Aakash Pai" }],
+  keywords: [
+    "Aakash Pai",
+    "Portfolio",
+    "Software Engineer",
+    "Full-Stack Developer",
+    "Sunway University",
+    "Malaysia Developer",
+    "Engineering Manager Malaysia",
+    "Kuala Lumpur Software Engineer",
+    "React Developer",
+    "Next.js",
+    "Go Engineer",
+  ],
+  authors: [{ name: "Aakash Pai", url: "https://aakashpai.dev" }],
   openGraph: {
     title: "Aakash Pai — Software Engineer",
-    description: "Personal portfolio of Aakash Pai",
+    description: "Personal portfolio of Aakash Pai — software engineer, full-stack developer, builder.",
+    url: "https://aakashpai.dev",
+    siteName: "Aakash Pai Portfolio",
+    locale: "en_US",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Aakash Pai — Software Engineer",
+    description: "Personal portfolio of Aakash Pai — software engineer, full-stack developer, builder.",
   },
 };
 
