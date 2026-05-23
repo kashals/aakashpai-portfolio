@@ -44,7 +44,7 @@ export type TechCategory = { label: string; items: string[] };
 export const TECH: TechCategory[] = [
   {
     label: "LANGUAGES",
-    items: ["HTML", "CSS", "JavaScript", "TypeScript", "Python", "Java"],
+    items: ["HTML", "CSS", "JavaScript", "TypeScript", "Python", "Java", "Go"],
   },
   {
     label: "FRONTEND",
@@ -89,6 +89,16 @@ export const PROJECTS: Project[] = [
     github: "https://github.com/kashals/linkops",
     live: "https://linkops-engine-909093874855.asia-southeast1.run.app",
     image: "/project_pictures/linkops.png",
+    featured: true,
+  },
+  {
+    name: "Distributed Rate Limiter Gateway",
+    description:
+      "Zero-framework distributed API gateway in pure Go enforcing global per-user rate limits across horizontally scaled replicas. Centralized Redis state mutated via atomic Lua scripts eliminates race conditions and double-counting. Ships two pluggable throttling algorithms — Token Bucket (lazy refill, HSET state) and Sliding Window Log (microsecond-precision sorted sets). Full JWT auth pipeline (HS256/RS256), reverse proxy with header mutation (strips Authorization, injects X-User-ID), and graceful SIGTERM shutdown with in-flight request draining.",
+    tech: ["Go", "Redis", "Lua Scripting", "JWT", "net/http", "Docker"],
+    github: "https://github.com/kashals/distributed-rate-limiter-gateway",
+    live: null,
+    image: "/project_pictures/drlg.png",
     featured: true,
   },
 ];
