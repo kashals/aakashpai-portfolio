@@ -74,7 +74,7 @@ export const PROJECTS: Project[] = [
   {
     name: "Sugar & Icing",
     description:
-      "Production-grade e-commerce platform for a local bakery. Server-authoritative Stripe payments, Cloudflare Turnstile bot protection, Upstash Redis rate limiting, atomic stock deduction via Supabase RPC, and a role-gated admin dashboard with real-time revenue analytics.",
+      "Production-grade mobile-first e-commerce architecture engineered for a local bakery using Next.js 15 App Router and strict UI-business logic separation. Features server-authoritative Stripe payment intents, Cloudflare Turnstile bot protection, and Upstash Redis rate limiting. Leverages a complex Supabase backend with Row Level Security (RLS), real-time database subscriptions, and atomic stock deduction via RPCs. Includes a comprehensive relational schema handling dynamic product options, promotional codes, custom cake orders, user profiles with multiple addresses, and a role-gated admin dashboard.",
     tech: ["TypeScript", "Next.js 15", "Supabase", "Stripe", "Upstash Redis", "Tailwind CSS"],
     github: "https://github.com/kashals/sugar-and-icing",
     live: "https://sugarandicing.vercel.app/",
@@ -84,7 +84,7 @@ export const PROJECTS: Project[] = [
   {
     name: "LinkOps Engine",
     description:
-      "Containerized enterprise decision-support system on Google Cloud Run. Processes pitch decks via Gemini 2.5 Flash async batch queues, mapping venture constraints against live relational data. Includes an XAI chat interface for real-time AI decision auditing.",
+      "Enterprise-grade human-in-the-loop AI decision-support dashboard containerized on Google Cloud Run for startup accelerator matchmaking. Ingests multimodal pitch decks (PDF/Images) and processes them via Gemini 2.5 Flash async batch queues running in background threads. Maps complex venture constraints against live CSV-based mentor and partner databases to generate ranked, structured JSON recommendations. Features a dedicated Explainable AI (XAI) chat interface with streaming responses, rate limiting, and 3R content guardrails for real-time algorithmic auditing before committing approved linkages to a downloadable ledger.",
     tech: ["Python", "Streamlit", "Gemini API", "Google Cloud Run", "Docker", "Pandas"],
     github: "https://github.com/kashals/linkops",
     live: "https://linkops-engine-909093874855.asia-southeast1.run.app",

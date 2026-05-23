@@ -173,7 +173,10 @@ export default function Projects() {
         </div>
 
         {/* GitHub Activity Section */}
-        <div className="container w-full max-w-5xl mx-auto flex flex-col github-activity-section relative z-10">
+        <div 
+          className="container w-full max-w-5xl mx-auto flex flex-col github-activity-section relative z-10"
+          style={{ marginTop: "120px" }}
+        >
           <div className="flex items-center justify-between mb-8">
             <h3 className="text-xl font-semibold tracking-tight" style={{ color: "var(--text)" }}>
               GitHub Activity
