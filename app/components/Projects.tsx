@@ -39,8 +39,7 @@ function ProjectCard({
   return (
     <div
       ref={container}
-      className="h-dvh flex justify-center sticky top-0"
-      style={{ paddingTop: "140px" }}
+      className="min-h-dvh h-fit md:h-dvh flex justify-center sticky top-0 pt-24 md:pt-[140px] pb-16 md:pb-0"
     >
       <div className="container w-full flex justify-center h-fit">
         <motion.div
@@ -174,8 +173,7 @@ export default function Projects() {
 
         {/* GitHub Activity Section */}
         <div 
-          className="container w-full max-w-5xl mx-auto flex flex-col github-activity-section relative z-10"
-          style={{ marginTop: "120px" }}
+          className="container w-full max-w-5xl mx-auto flex flex-col github-activity-section relative z-10 mt-16 md:mt-32"
         >
           <div className="flex items-center justify-between mb-8">
             <h3 className="text-xl font-semibold tracking-tight" style={{ color: "var(--text)" }}>

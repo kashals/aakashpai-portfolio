@@ -27,6 +27,7 @@ export default function ResumePage() {
     >
       {/* ── Top Bar ── */}
       <header
+        className="px-4 sm:px-6"
         style={{
           position: "sticky",
           top: 0,
@@ -36,19 +37,16 @@ export default function ResumePage() {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          padding: "0 24px",
           height: "56px",
           gap: "16px",
         }}
       >
         {/* Left: back + title */}
         <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+          {/* Desktop Back Link */}
           <Link
             href="/"
             style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "6px",
               color: "var(--muted)",
               textDecoration: "none",
               fontSize: "0.75rem",
@@ -58,12 +56,32 @@ export default function ResumePage() {
             }}
             onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text)")}
             onMouseLeave={(e) => (e.currentTarget.style.color = "var(--muted)")}
+            className="hidden sm:flex items-center gap-1.5"
           >
             <ArrowLeft size={13} />
             <span>Back</span>
           </Link>
 
+          {/* Mobile Back Link (Icon only, touch-friendly square button) */}
+          <Link
+            href="/"
+            style={{
+              color: "var(--muted)",
+              textDecoration: "none",
+              transition: "color 0.15s ease",
+              border: "1px solid var(--border)",
+              borderRadius: "6px",
+              background: "var(--surface-2)",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text)")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "var(--muted)")}
+            className="flex sm:hidden items-center justify-center w-9 h-9"
+          >
+            <ArrowLeft size={16} />
+          </Link>
+
           <div
+            className="hidden sm:block"
             style={{
               width: "1px",
               height: "16px",
@@ -71,7 +89,7 @@ export default function ResumePage() {
             }}
           />
 
-          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+          <div className="hidden sm:flex items-center gap-2">
             <FileText size={13} style={{ color: "var(--muted)" }} />
             <span
               style={{
@@ -91,6 +109,7 @@ export default function ResumePage() {
         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
           {/* Zoom controls */}
           <div
+            className="hidden sm:flex"
             style={{
               display: "flex",
               alignItems: "center",
@@ -150,15 +169,13 @@ export default function ResumePage() {
           </div>
 
           {/* Open in new tab */}
+          {/* Desktop Open Link (Untouched styling) */}
           <a
             href={RESUME_PATH}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Open in new tab"
             style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "6px",
               color: "var(--muted)",
               textDecoration: "none",
               fontSize: "0.7rem",
@@ -172,20 +189,39 @@ export default function ResumePage() {
             }}
             onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text)")}
             onMouseLeave={(e) => (e.currentTarget.style.color = "var(--muted)")}
+            className="hidden sm:flex items-center gap-1.5"
           >
             <ExternalLink size={12} />
-            <span className="hidden sm:inline">Open</span>
+            <span>Open</span>
           </a>
 
-          {/* Download */}
+          {/* Mobile Open Link (Square icon button) */}
+          <a
+            href={RESUME_PATH}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open in new tab"
+            style={{
+              color: "var(--muted)",
+              textDecoration: "none",
+              transition: "color 0.15s ease",
+              border: "1px solid var(--border)",
+              borderRadius: "6px",
+              background: "var(--surface-2)",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text)")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "var(--muted)")}
+            className="flex sm:hidden items-center justify-center w-9 h-9"
+          >
+            <ExternalLink size={14} />
+          </a>
+
+          {/* Desktop Download Link (Untouched styling) */}
           <a
             href={RESUME_PATH}
             download="Aakash_Pai_Resume.pdf"
             aria-label="Download resume"
             style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "6px",
               color: "var(--bg)",
               background: "var(--text)",
               textDecoration: "none",
@@ -200,9 +236,30 @@ export default function ResumePage() {
             }}
             onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
             onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+            className="hidden sm:flex items-center gap-1.5"
           >
             <Download size={12} />
             <span>Download</span>
+          </a>
+
+          {/* Mobile Download Link (Square icon button) */}
+          <a
+            href={RESUME_PATH}
+            download="Aakash_Pai_Resume.pdf"
+            aria-label="Download resume"
+            style={{
+              color: "var(--bg)",
+              background: "var(--text)",
+              textDecoration: "none",
+              transition: "opacity 0.15s ease",
+              borderRadius: "6px",
+              border: "1px solid var(--text)",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
+            onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+            className="flex sm:hidden items-center justify-center w-9 h-9"
+          >
+            <Download size={14} />
           </a>
         </div>
       </header>
