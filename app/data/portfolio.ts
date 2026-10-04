@@ -1,4 +1,4 @@
-// central data file — update content here only
+// central data file - update content here only
 
 export const ABOUT = {
   name: "Aakash Pai",
@@ -7,7 +7,7 @@ export const ABOUT = {
   university: "Sunway University",
   degree: "BSc (Hons) Computer Science",
   graduation: "Sep 2027",
-  bio: "BSc (Hons) Computer Science student at Sunway University with a strong foundation in full-stack web development. I build production-grade applications with Next.js, React, and Supabase — from e-commerce platforms to B2B workflow automation engines. Currently expanding into Python, data science, and machine learning.",
+  bio: "BSc (Hons) Computer Science student at Sunway University with a strong foundation in full-stack web development. I build production-grade applications with Next.js, React, and Supabase, ranging from e-commerce platforms to B2B workflow automation engines. Currently expanding into Python, data science, and machine learning.",
 };
 
 export const SOCIALS = {
@@ -74,7 +74,7 @@ export const PROJECTS: Project[] = [
   {
     name: "Sugar & Icing",
     description:
-      "Production-grade mobile-first e-commerce architecture engineered for a local bakery using Next.js 15 App Router and strict UI-business logic separation. Features server-authoritative Stripe payment intents, Cloudflare Turnstile bot protection, and Upstash Redis rate limiting. Leverages a complex Supabase backend with Row Level Security (RLS), real-time database subscriptions, and atomic stock deduction via RPCs. Includes a comprehensive relational schema handling dynamic product options, promotional codes, custom cake orders, user profiles with multiple addresses, and a role-gated admin dashboard.",
+      "Production-grade mobile-first e-commerce platform built for a local bakery with Next.js 15 App Router and strict UI-business logic separation.\n\nAtomic inventory deductions and real-time order updates run on a Supabase PostgreSQL backend with Row Level Security (RLS) and custom database RPCs to eliminate race conditions.\n\nEnforces server-authoritative Stripe payment intents, Upstash Redis rate limiting, and Cloudflare Turnstile bot protection alongside a role-gated admin management portal.",
     tech: ["TypeScript", "Next.js 15", "Supabase", "Stripe", "Upstash Redis", "Tailwind CSS"],
     github: "https://github.com/kashals/sugar-and-icing",
     live: "https://sugarandicing.vercel.app/",
@@ -84,7 +84,7 @@ export const PROJECTS: Project[] = [
   {
     name: "LinkOps Engine",
     description:
-      "Enterprise-grade human-in-the-loop AI decision-support dashboard containerized on Google Cloud Run for startup accelerator matchmaking. Ingests multimodal pitch decks (PDF/Images) and processes them via Gemini 2.5 Flash async batch queues running in background threads. Maps complex venture constraints against live CSV-based mentor and partner databases to generate ranked, structured JSON recommendations. Features a dedicated Explainable AI (XAI) chat interface with streaming responses, rate limiting, and 3R content guardrails for real-time algorithmic auditing before committing approved linkages to a downloadable ledger.",
+      "Enterprise human-in-the-loop AI decision engine containerized on Google Cloud Run for startup accelerator matchmaking.\n\nIngests multimodal pitch decks and processes venture criteria via Gemini 2.5 Flash async batch pipelines running against live mentor and partner databases.\n\nFeatures an Explainable AI (XAI) streaming audit chat with strict 3R guardrails, allowing operators to inspect reasoning traces before committing linkages to a verified ledger.",
     tech: ["Python", "Streamlit", "Gemini API", "Google Cloud Run", "Docker", "Pandas"],
     github: "https://github.com/kashals/linkops",
     live: "https://linkops-engine-909093874855.asia-southeast1.run.app",
@@ -94,11 +94,31 @@ export const PROJECTS: Project[] = [
   {
     name: "Distributed Rate Limiter Gateway",
     description:
-      "Zero-framework distributed API gateway in pure Go enforcing global per-user rate limits across horizontally scaled replicas. Centralized Redis state mutated via atomic Lua scripts eliminates race conditions and double-counting. Ships two pluggable throttling algorithms — Token Bucket (lazy refill, HSET state) and Sliding Window Log (microsecond-precision sorted sets). Full JWT auth pipeline (HS256/RS256), reverse proxy with header mutation (strips Authorization, injects X-User-ID), and graceful SIGTERM shutdown with in-flight request draining.",
+      "Zero-framework distributed API gateway written in pure Go, enforcing global per-user rate limits across horizontally scaled replicas.\n\nCentralized Redis state mutated via atomic Lua scripts prevents race conditions and double-counting across concurrent nodes, supporting both Token Bucket and microsecond Sliding Window Log algorithms.\n\nFeatures a reverse proxy with upstream header transformation, JWT authentication (HS256/RS256), and graceful SIGTERM draining of in-flight connections.",
     tech: ["Go", "Redis", "Lua Scripting", "JWT", "net/http", "Docker"],
     github: "https://github.com/kashals/distributed-rate-limiter-gateway",
     live: null,
     image: "/project_pictures/drlg.png",
+    featured: true,
+  },
+  {
+    name: "Order Settlement Engine",
+    description:
+      "Event-driven distributed settlement engine built with Java 21 and Spring Boot 3, ensuring strong consistency across microservices without distributed locks.\n\nEliminates dual-write failure modes via the Transactional Outbox pattern and PostgreSQL row locks (FOR UPDATE SKIP LOCKED), paired with ON CONFLICT deduplication to safely discard duplicate Kafka deliveries.\n\nExecutes closed-loop saga choreography with compensating state transitions, automated Dead Letter Queue routing with exponential backoff, and scheduled retention pruning.",
+    tech: ["Java 21", "Spring Boot 3", "Apache Kafka", "PostgreSQL", "Docker", "Flyway"],
+    github: "https://github.com/kashals/order-settlement-engine",
+    live: null,
+    image: null,
+    featured: true,
+  },
+  {
+    name: "SUDU File Management System",
+    description:
+      "Full-stack workspace and note management system engineered for SUDU.AI with Vue 3 Composition API, Node.js, Express, and Docker Compose.\n\nEnforces action-isolated PIN locking with security question recovery, Helmet HTTP protection, and dual-layer schema validation with Zod and reactive client validators over parameterized SQLite queries.\n\nUtilizes context-keyed Vue TransitionGroup reconciliation to guarantee clean DOM diffing during search, folder filtering, and view mode transitions without artificial delays.",
+    tech: ["Vue 3", "TypeScript", "Node.js", "Express", "SQLite", "Tailwind CSS", "Docker"],
+    github: "https://github.com/kashals/sudu-file-management-system",
+    live: null,
+    image: null,
     featured: true,
   },
 ];
@@ -114,7 +134,7 @@ export const EXPERIENCE: ExperienceEntry[] = [
   {
     company: "InQuantum AI",
     role: "Frontend Developer Intern",
-    dates: "Apr 2025 — Aug 2025",
+    dates: "Apr 2025 - Aug 2025",
     points: [
       "Designed and built UI/UX for xPulse, an internal AI-driven platform.",
       "Completed a frontend assessment: reverse-engineered a full-stack real-time chat application from a visual reference, integrating provided backend APIs to deliver a fully working product.",
@@ -135,7 +155,7 @@ export const EDUCATION: EducationEntry[] = [
   {
     institution: "Sunway University",
     qualification: "BSc (Hons) Computer Science",
-    period: "Sep 2025 — Sep 2027",
+    period: "Sep 2025 - Sep 2027",
     status: "In Progress",
   },
   {
