@@ -24,7 +24,7 @@ export default function Projects() {
         />
 
         {/* Explicit Spacer guaranteeing generous breathing room */}
-        <div style={{ height: "140px", width: "100%" }} aria-hidden="true" />
+        <div className="h-20 md:h-[140px] w-full" aria-hidden="true" />
 
         {/* GitHub Activity Section */}
         <div style={{ paddingTop: "48px", borderTop: "1px solid var(--border)" }}>
@@ -43,21 +43,16 @@ export default function Projects() {
               View Profile
             </a>
           </div>
-          {/* Bento Grid: stats | langs / calendar full-width */}
-          <div style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "10px",
-          }}>
+          {/* Bento Grid: 1 col on mobile, 2 cols on desktop */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
             {/* Stats card */}
-            <div style={{
-              background: "var(--surface)",
-              border: "1px solid var(--border)",
-              borderRadius: "12px",
-              overflow: "hidden",
-              display: "flex",
-              alignItems: "center",
-            }}>
+            <div
+              className="rounded-xl overflow-hidden flex items-center justify-center"
+              style={{
+                background: "var(--surface)",
+                border: "1px solid var(--border)",
+              }}
+            >
               <img
                 src="https://github-stats-extended.vercel.app/api?username=kashals&show_icons=true&include_all_commits=true&count_private=true&hide_border=true&bg_color=151518&title_color=e8e8ea&text_color=e8e8ea&icon_color=64646f"
                 alt="Aakash's GitHub Stats"
@@ -66,14 +61,13 @@ export default function Projects() {
             </div>
 
             {/* Top languages donut */}
-            <div style={{
-              background: "var(--surface)",
-              border: "1px solid var(--border)",
-              borderRadius: "12px",
-              overflow: "hidden",
-              display: "flex",
-              alignItems: "center",
-            }}>
+            <div
+              className="rounded-xl overflow-hidden flex items-center justify-center"
+              style={{
+                background: "var(--surface)",
+                border: "1px solid var(--border)",
+              }}
+            >
               <img
                 src="https://github-stats-extended.vercel.app/api/top-langs?username=kashals&layout=donut&langs_count=4&hide_border=true&bg_color=151518&title_color=e8e8ea&text_color=e8e8ea"
                 alt="Aakash's Top Languages"
@@ -82,31 +76,30 @@ export default function Projects() {
             </div>
 
             {/* Contribution calendar — full width bottom cell */}
-            <div style={{
-              gridColumn: "1 / -1",
-              background: "var(--surface)",
-              border: "1px solid var(--border)",
-              borderRadius: "12px",
-              padding: "28px 32px",
-              overflowX: "auto",
-              display: "flex",
-              justifyContent: "center",
-            }}>
-              <GitHubCalendar
-                username="kashals"
-                colorScheme="dark"
-                fontSize={12}
-                blockSize={12}
-                theme={{
-                  dark: [
-                    "#151518",
-                    "#2c2c31",
-                    "#4a4a52",
-                    "#888893",
-                    "#e8e8ea",
-                  ],
-                }}
-              />
+            <div
+              className="col-span-1 md:col-span-2 rounded-xl overflow-x-auto flex justify-start md:justify-center p-4 sm:p-6 md:p-8"
+              style={{
+                background: "var(--surface)",
+                border: "1px solid var(--border)",
+              }}
+            >
+              <div className="min-w-[660px] md:min-w-0">
+                <GitHubCalendar
+                  username="kashals"
+                  colorScheme="dark"
+                  fontSize={12}
+                  blockSize={12}
+                  theme={{
+                    dark: [
+                      "#151518",
+                      "#2c2c31",
+                      "#4a4a52",
+                      "#888893",
+                      "#e8e8ea",
+                    ],
+                  }}
+                />
+              </div>
             </div>
           </div>
         </div>

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { ExternalLink, X, ArrowUpRight } from "lucide-react";
+import { ExternalLink, X, ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import {
   SiGithub,
   SiTypescript,
@@ -180,6 +180,24 @@ export function FeyCards({
   const displayText = heading || children || "Engineered for scale. Built to perform.";
   const hoveredProject = activeIndex !== null ? cards[activeIndex]?.project : null;
 
+  const currentMobileIndex = activeIndex ?? 0;
+  const paginationItems = useMemo(() => {
+    const total = cards.length;
+    if (total <= 3) {
+      return Array.from({ length: total }, (_, i) => i);
+    }
+    let start = currentMobileIndex - 1;
+    if (start < 0) start = 0;
+    if (start > total - 3) start = total - 3;
+
+    const nums = [start, start + 1, start + 2];
+    const items: (number | string)[] = [];
+    if (start > 0) items.push("...");
+    items.push(...nums);
+    if (start + 2 < total - 1) items.push("...");
+    return items;
+  }, [currentMobileIndex, cards.length]);
+
   return (
     <div className={cn("flex w-full flex-col items-center justify-center pt-6 pb-20 md:pt-10 md:pb-28 select-none relative", className)}>
       <div className="relative flex flex-col items-center justify-center w-full max-w-full">
@@ -311,8 +329,8 @@ export function FeyCards({
           </div>
         </div>
 
-        {/* Hover / Active Telemetry Footer Hint */}
-        <div className="mt-6 md:mt-8 flex items-center justify-center text-center px-4 text-xs font-mono text-[var(--muted)]">
+        {/* Desktop Hover / Active Telemetry Footer Hint (100% Untouched on Desktop) */}
+        <div className="hidden md:flex mt-8 items-center justify-center text-center px-4 text-xs font-mono text-[var(--muted)]">
           {hoveredProject ? (
             <span className="inline-flex items-center gap-2 text-[var(--text)] animate-fadeIn font-semibold">
               <span className="h-1.5 w-1.5 rounded-full bg-[var(--text)] animate-pulse" />
@@ -323,6 +341,107 @@ export function FeyCards({
               HOVER TO SHIFT • CLICK CARD TO EXPAND SPEC
             </span>
           )}
+        </div>
+
+        {/* Mobile-Only Project Touch Navigator (Desktop completely untouched) */}
+        <div className="flex md:hidden flex-col items-center w-full px-4 mt-4">
+          {/* Active project preview card - Soft Rounded with generous padding */}
+          <div
+            className="w-full max-w-sm rounded-xl flex items-center justify-between gap-3 shadow-md"
+            style={{
+              padding: "14px 18px",
+              background: "var(--surface)",
+              border: "1px solid var(--border)",
+            }}
+          >
+            <div className="flex flex-col min-w-0 pr-2">
+              <span className="font-mono text-[10px] uppercase tracking-wider" style={{ color: "var(--muted)" }}>
+                PROJECT {(currentMobileIndex + 1).toString().padStart(2, "0")} / {cards.length.toString().padStart(2, "0")}
+              </span>
+              <span className="font-semibold text-xs sm:text-sm truncate mt-1" style={{ color: "var(--text)" }}>
+                {cards[currentMobileIndex]?.project?.name || "Select Project"}
+              </span>
+            </div>
+
+            {/* Inspect Icon Button (Logo only, soft-cornered rectangle, NO harsh white box) */}
+            <button
+              type="button"
+              onClick={() => {
+                const targetProject = cards[currentMobileIndex]?.project;
+                if (targetProject) setSelectedProject(targetProject);
+              }}
+              aria-label="Inspect project specification"
+              className="w-8 h-8 rounded-lg flex items-center justify-center cursor-pointer active:scale-95 transition-all shrink-0"
+              style={{
+                background: "var(--surface-2)",
+                border: "1px solid var(--border)",
+                color: "var(--text)",
+              }}
+            >
+              <ArrowUpRight size={15} />
+            </button>
+          </div>
+
+          {/* Soft Pagination: bare < and > icons, 3 soft-cornered numbers, ... if more */}
+          <div className="flex items-center justify-center gap-2 mt-5">
+            {/* Bare Previous Arrow */}
+            <button
+              type="button"
+              disabled={currentMobileIndex === 0}
+              onClick={() => setActiveIndex(Math.max(0, currentMobileIndex - 1))}
+              aria-label="Previous project"
+              className="p-1 cursor-pointer transition-colors disabled:opacity-20 disabled:pointer-events-none"
+              style={{ color: "var(--muted)" }}
+            >
+              <ChevronLeft size={14} />
+            </button>
+
+            {/* Pagination Items (Strictly 3 numbers + ellipsis) */}
+            {paginationItems.map((item, idx) => {
+              if (typeof item === "string") {
+                return (
+                  <span
+                    key={`dots-${idx}`}
+                    className="font-mono text-[11px] px-1 text-center select-none"
+                    style={{ color: "var(--dim)" }}
+                  >
+                    ...
+                  </span>
+                );
+              }
+
+              const isActive = currentMobileIndex === item;
+              return (
+                <button
+                  key={item}
+                  type="button"
+                  onClick={() => setActiveIndex(item)}
+                  aria-label={`Go to project ${item + 1}`}
+                  className="h-6 min-w-6 px-1.5 rounded font-mono text-[11px] flex items-center justify-center transition-all cursor-pointer"
+                  style={{
+                    background: isActive ? "var(--text)" : "var(--surface-2)",
+                    border: `1px solid ${isActive ? "var(--text)" : "var(--border)"}`,
+                    color: isActive ? "var(--background)" : "var(--muted)",
+                    fontWeight: isActive ? 700 : 500,
+                  }}
+                >
+                  {item + 1}
+                </button>
+              );
+            })}
+
+            {/* Bare Next Arrow */}
+            <button
+              type="button"
+              disabled={currentMobileIndex === cards.length - 1}
+              onClick={() => setActiveIndex(Math.min(cards.length - 1, currentMobileIndex + 1))}
+              aria-label="Next project"
+              className="p-1 cursor-pointer transition-colors disabled:opacity-20 disabled:pointer-events-none"
+              style={{ color: "var(--muted)" }}
+            >
+              <ChevronRight size={14} />
+            </button>
+          </div>
         </div>
       </div>
 
@@ -375,7 +494,7 @@ export function FeyCards({
               style={{
                 transformStyle: "preserve-3d",
               }}
-              className="relative z-10 w-full max-w-3xl max-h-[88vh] overflow-y-auto rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 sm:p-8 md:p-10 shadow-[0_40px_120px_rgba(0,0,0,0.95),0_0_80px_rgba(255,255,255,0.04)]"
+              className="relative z-10 w-full max-w-3xl max-h-[88vh] overflow-y-auto rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 sm:p-8 md:p-10 shadow-[0_40px_120px_rgba(0,0,0,0.95),0_0_80px_rgba(255,255,255,0.04)]"
             >
               {/* Header */}
               <div className="flex items-center justify-between pb-5 border-b border-[var(--border)]">
@@ -441,6 +560,7 @@ export function FeyCards({
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "space-between",
+                  flexWrap: "wrap",
                   gap: "12px",
                 }}
               >
