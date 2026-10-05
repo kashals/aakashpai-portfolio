@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useMemo } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "motion/react";
 import { ExternalLink, X, ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import {
@@ -176,6 +177,11 @@ export function FeyCards({
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [selectedProject]);
+
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const displayText = heading || children || "Engineered for scale. Built to perform.";
   const hoveredProject = activeIndex !== null ? cards[activeIndex]?.project : null;
@@ -446,158 +452,163 @@ export function FeyCards({
       </div>
 
       {/* Modal / Expanded Project Specification Window */}
-      <AnimatePresence>
-        {selectedProject && (
-          <div className="fixed inset-0 z-[120] flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
-              className="fixed inset-0 bg-black/85 backdrop-blur-md"
-              onClick={() => setSelectedProject(null)}
-            />
-
-            {/* Expanded Modal Box: 3D Unfolding from the hovered card */}
-            <motion.div
-              initial={{
-                opacity: 0,
-                scale: 0.48,
-                rotateY: -24,
-                rotateX: 14,
-                y: 70,
-                filter: "blur(6px)",
-              }}
-              animate={{
-                opacity: 1,
-                scale: 1,
-                rotateY: 0,
-                rotateX: 0,
-                y: 0,
-                filter: "blur(0px)",
-              }}
-              exit={{
-                opacity: 0,
-                scale: 0.52,
-                rotateY: -20,
-                rotateX: 10,
-                y: 50,
-                filter: "blur(4px)",
-              }}
-              transition={{
-                type: "spring",
-                stiffness: 340,
-                damping: 26,
-                mass: 0.75,
-              }}
-              style={{
-                transformStyle: "preserve-3d",
-              }}
-              className="relative z-10 w-full max-w-3xl max-h-[88vh] overflow-y-auto rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 sm:p-8 md:p-10 shadow-[0_40px_120px_rgba(0,0,0,0.95),0_0_80px_rgba(255,255,255,0.04)]"
-            >
-              {/* Header */}
-              <div className="flex items-center justify-between pb-5 border-b border-[var(--border)]">
-                <span className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.2em] text-[var(--muted)]">
-                  ARCHITECTURE SPECIFICATION
-                </span>
-                <button
+      {mounted &&
+        typeof document !== "undefined" &&
+        createPortal(
+          <AnimatePresence>
+            {selectedProject && (
+              <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 pt-14 pb-6 md:p-6 overflow-y-auto">
+                {/* Backdrop */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.25 }}
+                  className="fixed inset-0 bg-black/85 backdrop-blur-md"
                   onClick={() => setSelectedProject(null)}
-                  className="p-1.5 rounded-md border border-[var(--border)] bg-[var(--surface-2)] text-[var(--muted)] hover:text-[var(--text)] hover:border-[var(--muted)] transition-colors cursor-pointer"
-                  aria-label="Close modal"
+                />
+
+                {/* Expanded Modal Box: 3D Unfolding from the hovered card */}
+                <motion.div
+                  initial={{
+                    opacity: 0,
+                    scale: 0.48,
+                    rotateY: -24,
+                    rotateX: 14,
+                    y: 70,
+                    filter: "blur(6px)",
+                  }}
+                  animate={{
+                    opacity: 1,
+                    scale: 1,
+                    rotateY: 0,
+                    rotateX: 0,
+                    y: 0,
+                    filter: "blur(0px)",
+                  }}
+                  exit={{
+                    opacity: 0,
+                    scale: 0.52,
+                    rotateY: -20,
+                    rotateX: 10,
+                    y: 50,
+                    filter: "blur(4px)",
+                  }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 340,
+                    damping: 26,
+                    mass: 0.75,
+                  }}
+                  style={{
+                    transformStyle: "preserve-3d",
+                  }}
+                  className="relative z-10 w-full max-w-3xl max-h-[76dvh] md:max-h-[88vh] overflow-y-auto rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 sm:p-8 md:p-10 shadow-[0_40px_120px_rgba(0,0,0,0.95),0_0_80px_rgba(255,255,255,0.04)]"
                 >
-                  <X size={15} />
-                </button>
-              </div>
-
-              {/* Title */}
-              <div style={{ marginTop: "24px" }}>
-                <h2 className="text-xl sm:text-2xl md:text-[28px] font-bold tracking-tight text-[var(--text)] leading-snug">
-                  {selectedProject.name}
-                </h2>
-              </div>
-
-              {/* Description */}
-              <div style={{ marginTop: "24px" }}>
-                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)]" style={{ marginBottom: "12px" }}>
-                  // OVERVIEW
-                </p>
-                <div className="flex flex-col font-mono text-[12px] sm:text-[13px] text-[var(--text)]/70" style={{ gap: "14px", lineHeight: "1.85" }}>
-                  {selectedProject.description.split("\n\n").map((para, i) => (
-                    <p key={i}>{para}</p>
-                  ))}
-                </div>
-              </div>
-
-              {/* Tech Stack */}
-              <div style={{ marginTop: "40px" }}>
-                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)]" style={{ marginBottom: "12px" }}>
-                  // STACK
-                </p>
-                <div className="flex flex-wrap" style={{ gap: "8px" }}>
-                  {selectedProject.tech.map((t) => {
-                    const TechIcon = getTechIcon(t);
-                    return (
-                      <span
-                        key={t}
-                        className="inline-flex items-center font-mono text-[11px] rounded-md border border-[var(--border)] bg-[var(--surface-2)] text-[var(--text)]/75 hover:text-[var(--text)] hover:border-[var(--muted)] transition-colors"
-                        style={{ gap: "6px", padding: "6px 10px" }}
-                      >
-                        {TechIcon && <TechIcon size={12} className="shrink-0 opacity-70" />}
-                        <span>{t}</span>
-                      </span>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Action Buttons */}
-              <div
-                style={{
-                  marginTop: "40px",
-                  paddingTop: "20px",
-                  borderTop: "1px solid var(--border)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  flexWrap: "wrap",
-                  gap: "12px",
-                }}
-              >
-                <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-                  <a
-                    href={selectedProject.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="cursor-pointer transition-opacity hover:opacity-50"
-                    style={{ color: "#aaaaaa", display: "flex", alignItems: "center" }}
-                    aria-label="View on GitHub"
-                  >
-                    <SiGithub size={17} style={{ color: "#aaaaaa" }} />
-                  </a>
-
-                  {selectedProject.live && (
-                    <a
-                      href={selectedProject.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="cursor-pointer transition-opacity hover:opacity-50"
-                      style={{ color: "#aaaaaa", display: "flex", alignItems: "center" }}
-                      aria-label="Live Demo"
+                  {/* Header */}
+                  <div className="flex items-center justify-between pb-5 border-b border-[var(--border)]">
+                    <span className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.2em] text-[var(--muted)]">
+                      ARCHITECTURE SPECIFICATION
+                    </span>
+                    <button
+                      onClick={() => setSelectedProject(null)}
+                      className="w-8 h-8 rounded-lg border border-[var(--border)] bg-[var(--surface-2)] text-[var(--muted)] hover:text-[var(--text)] hover:border-[var(--muted)] flex items-center justify-center transition-colors cursor-pointer shrink-0"
+                      aria-label="Close modal"
                     >
-                      <ExternalLink size={16} style={{ color: "#aaaaaa" }} />
-                    </a>
-                  )}
-                </div>
+                      <X size={16} />
+                    </button>
+                  </div>
 
-                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)]" style={{ textAlign: "right" }}>
-                  {selectedProject.live ? "PRODUCTION DEPLOYMENT" : "CORE BACKEND SERVICE"}
-                </span>
+                  {/* Title */}
+                  <div style={{ marginTop: "24px" }}>
+                    <h2 className="text-xl sm:text-2xl md:text-[28px] font-bold tracking-tight text-[var(--text)] leading-snug">
+                      {selectedProject.name}
+                    </h2>
+                  </div>
+
+                  {/* Description */}
+                  <div style={{ marginTop: "24px" }}>
+                    <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)]" style={{ marginBottom: "12px" }}>
+                      // OVERVIEW
+                    </p>
+                    <div className="flex flex-col font-mono text-[12px] sm:text-[13px] text-[var(--text)]/70" style={{ gap: "14px", lineHeight: "1.85" }}>
+                      {selectedProject.description.split("\n\n").map((para, i) => (
+                        <p key={i}>{para}</p>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Tech Stack */}
+                  <div style={{ marginTop: "40px" }}>
+                    <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)]" style={{ marginBottom: "12px" }}>
+                      // STACK
+                    </p>
+                    <div className="flex flex-wrap" style={{ gap: "8px" }}>
+                      {selectedProject.tech.map((t) => {
+                        const TechIcon = getTechIcon(t);
+                        return (
+                          <span
+                            key={t}
+                            className="inline-flex items-center font-mono text-[11px] rounded-md border border-[var(--border)] bg-[var(--surface-2)] text-[var(--text)]/75 hover:text-[var(--text)] hover:border-[var(--muted)] transition-colors"
+                            style={{ gap: "6px", padding: "6px 10px" }}
+                          >
+                            {TechIcon && <TechIcon size={12} className="shrink-0 opacity-70" />}
+                            <span>{t}</span>
+                          </span>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div
+                    style={{
+                      marginTop: "40px",
+                      paddingTop: "20px",
+                      borderTop: "1px solid var(--border)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      flexWrap: "wrap",
+                      gap: "12px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+                      <a
+                        href={selectedProject.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="cursor-pointer transition-opacity hover:opacity-50"
+                        style={{ color: "#aaaaaa", display: "flex", alignItems: "center" }}
+                        aria-label="View on GitHub"
+                      >
+                        <SiGithub size={17} style={{ color: "#aaaaaa" }} />
+                      </a>
+
+                      {selectedProject.live && (
+                        <a
+                          href={selectedProject.live}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="cursor-pointer transition-opacity hover:opacity-50"
+                          style={{ color: "#aaaaaa", display: "flex", alignItems: "center" }}
+                          aria-label="Live Demo"
+                        >
+                          <ExternalLink size={16} style={{ color: "#aaaaaa" }} />
+                        </a>
+                      )}
+                    </div>
+
+                    <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)]" style={{ textAlign: "right" }}>
+                      {selectedProject.live ? "PRODUCTION DEPLOYMENT" : "CORE BACKEND SERVICE"}
+                    </span>
+                  </div>
+                </motion.div>
               </div>
-            </motion.div>
-          </div>
+            )}
+          </AnimatePresence>,
+          document.body
         )}
-      </AnimatePresence>
     </div>
   );
 }
