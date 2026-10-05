@@ -43,16 +43,71 @@ export default function Projects() {
               View Profile
             </a>
           </div>
-          <div
-            className="p-8 w-full overflow-x-auto flex justify-center rounded-lg"
-            style={{ background: "var(--surface)", border: "1px solid var(--border)" }}
-          >
-            <GitHubCalendar
-              username="kashals"
-              colorScheme="dark"
-              fontSize={12}
-              blockSize={12}
-            />
+          {/* Bento Grid: stats | langs / calendar full-width */}
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "10px",
+          }}>
+            {/* Stats card */}
+            <div style={{
+              background: "var(--surface)",
+              border: "1px solid var(--border)",
+              borderRadius: "12px",
+              overflow: "hidden",
+              display: "flex",
+              alignItems: "center",
+            }}>
+              <img
+                src="https://github-stats-extended.vercel.app/api?username=kashals&show_icons=true&include_all_commits=true&count_private=true&hide_border=true&bg_color=151518&title_color=e8e8ea&text_color=e8e8ea&icon_color=64646f"
+                alt="Aakash's GitHub Stats"
+                style={{ width: "100%", display: "block" }}
+              />
+            </div>
+
+            {/* Top languages donut */}
+            <div style={{
+              background: "var(--surface)",
+              border: "1px solid var(--border)",
+              borderRadius: "12px",
+              overflow: "hidden",
+              display: "flex",
+              alignItems: "center",
+            }}>
+              <img
+                src="https://github-stats-extended.vercel.app/api/top-langs?username=kashals&layout=donut&langs_count=4&hide_border=true&bg_color=151518&title_color=e8e8ea&text_color=e8e8ea"
+                alt="Aakash's Top Languages"
+                style={{ width: "100%", display: "block" }}
+              />
+            </div>
+
+            {/* Contribution calendar — full width bottom cell */}
+            <div style={{
+              gridColumn: "1 / -1",
+              background: "var(--surface)",
+              border: "1px solid var(--border)",
+              borderRadius: "12px",
+              padding: "28px 32px",
+              overflowX: "auto",
+              display: "flex",
+              justifyContent: "center",
+            }}>
+              <GitHubCalendar
+                username="kashals"
+                colorScheme="dark"
+                fontSize={12}
+                blockSize={12}
+                theme={{
+                  dark: [
+                    "#151518",
+                    "#2c2c31",
+                    "#4a4a52",
+                    "#888893",
+                    "#e8e8ea",
+                  ],
+                }}
+              />
+            </div>
           </div>
         </div>
       </div>
