@@ -128,6 +128,7 @@ export type ExperienceEntry = {
   role: string;
   dates: string;
   points: string[];
+  url?: string;
 };
 
 export const EXPERIENCE: ExperienceEntry[] = [
@@ -135,10 +136,11 @@ export const EXPERIENCE: ExperienceEntry[] = [
     company: "InQuantum AI",
     role: "Frontend Developer Intern",
     dates: "Apr 2025 - Aug 2025",
+    url: "https://www.inquantumai.com/",
     points: [
-      "Designed and built UI/UX for xPulse, an internal AI-driven platform.",
-      "Completed a frontend assessment: reverse-engineered a full-stack real-time chat application from a visual reference, integrating provided backend APIs to deliver a fully working product.",
-      "Worked with n8n for workflow automation and Framer Motion for production-quality animations.",
+      "Built core UI modules and responsive dashboard views for xPulse, an internal AI analytics platform, using Next.js, TypeScript, and Tailwind CSS.",
+      "Integrated backend REST APIs with end-to-end state management, request caching, and error boundaries to ensure interface reliability.",
+      "Automated internal cross-service data workflows using n8n and developed production UI micro-interactions using Framer Motion.",
     ],
   },
 ];
@@ -148,21 +150,60 @@ export type EducationEntry = {
   qualification: string;
   period: string;
   status: "In Progress" | "Completed";
-  cgpa?: string;
+  cgpa: string;
+  award?: string;
+  honors?: {
+    title: string;
+    detail: string;
+    tag?: string;
+  }[];
+  coursework?: string[];
+  highlights?: string[];
 };
 
 export const EDUCATION: EducationEntry[] = [
   {
-    institution: "Sunway University",
+    institution: "Sunway University & Lancaster University",
+    award: "Dual Award Programme (Malaysia & UK)",
     qualification: "BSc (Hons) Computer Science",
-    period: "Sep 2025 - Sep 2027",
+    period: "Sep 2025 - Sep 2027 (Expected)",
     status: "In Progress",
+    cgpa: "3.54 / 4.00",
+    honors: [
+      {
+        title: "Dean's List Award",
+        detail: "Faculty of Engineering and Technology (Feb 2026 Semester)",
+        tag: "Academic Honors",
+      },
+      {
+        title: "ACE Scholarship",
+        detail: "RM 11,000/year merit scholarship awarded for academic performance",
+        tag: "Merit Grant",
+      },
+    ],
+    highlights: [
+      "Dean's List Award - February 2026 Semester, Faculty of Engineering and Technology",
+      "ACE Scholarship - RM 11,000/year merit scholarship based on academic performance",
+    ],
   },
   {
-    institution: "Sunway College",
+    institution: "Sunway College, Selangor, Malaysia",
+    award: "Distinction Standing",
     qualification: "Diploma in Information Technology",
-    period: "Aug 2023 — Aug 2025",
+    period: "Aug 2023 - Aug 2025",
     status: "Completed",
-    cgpa: "3.83/4.00",
+    cgpa: "3.83 / 4.00",
+    coursework: [
+      "Web Development",
+      "Database Fundamentals",
+      "Mobile Application Development",
+      "Object-Oriented Modeling",
+      "Java Programming",
+      "Systems Analysis & Design",
+      "Computer System Architecture",
+    ],
+    highlights: [
+      "Relevant Coursework: Web Development, Database Fundamentals, Mobile Application Development, Object-Oriented Modeling, Java Programming, Systems Analysis & Design, Computer System Architecture",
+    ],
   },
 ];
